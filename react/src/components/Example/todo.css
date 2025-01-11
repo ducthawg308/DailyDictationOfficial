@@ -1,0 +1,121 @@
+.todo-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.todo-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-title{
+    background: linear-gradient(to right, #30CFD0 0%, #330867 100%); 
+    background-clip: text;
+    color: transparent;
+    font-size: 38px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.todo-new{
+    margin-bottom: 20px;
+}
+
+.todo-new input{
+    border: none;
+    background-color: #f1eaea;
+    padding: 18px;
+    font-size: 16px;
+    border-radius: 10px;
+    outline: none;
+    color: #000000;
+}
+
+.todo-new button{
+    border: none;
+    background-color: #30CFD0;
+    color: white;
+    padding: 16px 36px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.todo-new button:hover{
+    background-color: #88c7c7;
+    cursor: pointer;
+}
+
+.todo-data{
+    border: #4286ad 2px solid;
+    border-radius: 10px;
+    padding: 10px;
+    width: 150%;
+}
+
+.todo-data div{
+    font-size: 18px;
+    padding: 6px;
+    border-radius: 5px
+}
+
+.todo-data div:hover{
+    background-color: #0a6d6d;
+    color: white;
+    cursor: pointer
+}
+
+.todo-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-item button{
+    border: none;
+    background-color: #ff0000;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.todo-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 160px;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+}
+.logo:hover {
+filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(360deg);
+}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+.logo {
+    animation: logo-spin infinite 20s linear;
+}
+}
