@@ -1,6 +1,34 @@
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import axios from "axios";
+import axiosClient from "../axiosClient";
+import { useStateContext } from "../contexts/contextprovider";
 
 const Register = () => {
+    const nameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    const {setUser, setToken} = useStateContext();
+
+    const Submit = (ev) => {
+        ev.preventDefault();
+        const payload = {
+            name: nameRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+        }
+        axiosClient.post("/register", payload).then(({data})=>{
+            setUser(data.user);
+            setToken(data.token);
+        }).catch((err)=>{
+            const response = err.response;
+            if(response && response.status === 422){
+                console.log(response.data.errors);
+            }
+        });
+    };
+
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -17,12 +45,27 @@ const Register = () => {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Create an account
                         </h1>
-                        <form className="space-y-4 md:space-y-6" action="#">
+                        <form onSubmit={Submit} className="space-y-4 md:space-y-6" action="#">
+                            <div>
+                                <label htmlFor="fullName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Your name
+                                </label>
+                                <input
+                                    ref={nameRef}
+                                    type="text"
+                                    name="fullName"
+                                    id="fullName"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Nguyen Van A"
+                                    required
+                                />
+                            </div>
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Your email
                                 </label>
                                 <input
+                                    ref={emailRef}
                                     type="email"
                                     name="email"
                                     id="email"
@@ -36,6 +79,7 @@ const Register = () => {
                                     Password
                                 </label>
                                 <input
+                                    ref={passwordRef}
                                     type="password"
                                     name="password"
                                     id="password"
@@ -92,7 +136,7 @@ const Register = () => {
                                 Create an account
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Already have an account?{" "}
+                                Already have an account?
                                 <Link
                                     to="/login"
                                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
